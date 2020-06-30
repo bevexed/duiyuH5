@@ -3,11 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <title>注册成功</title>
-  <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-  <link rel="apple-touch-icon" href="icon.png">
-  <link rel="stylesheet" type="text/css" href="css/dist.min.css">
+  <meta content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+  <link href="icon.png" rel="apple-touch-icon">
+  <link href="css/dist.min.css" rel="stylesheet" type="text/css">
+  <style>
+    .s-success{
+      background: #FFEFD2;
+    }
+    .s-bg {
+      width: 100vw;
+      position: absolute;
+      top: 0;
+      z-index: -2;
+    }
+
+    .s-bottom{
+      position: absolute;
+      top: 272px;
+      width: 100vw;
+    }
+
+    .s-bg-white {
+      width: 100vw;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .s-buttons {
+      width: 80vw;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: auto;
+    }
+
+    .s-button {
+      display: inline-block;
+      width: 122px;
+      height: 30px;
+      border-radius: 15px;
+      border: 1px solid rgba(254, 98, 71, 1);
+      font-size: 14px;
+      font-family: PingFangSC-Medium, PingFang SC;
+      font-weight: 500;
+      color: rgba(254, 98, 71, 1);
+      background: transparent;
+      line-height: 30px;
+      text-align: center;
+    }
+    .s-p{
+      font-size:22px;
+      font-family:PingFangSC-Semibold,PingFang SC;
+      font-weight:600;
+      color:rgba(51,51,51,1);
+      line-height:30px;
+      text-align: center;
+      padding: 10px 0 0 0;
+    }
+
+    .s-rule{
+      width: 300px;
+      padding: 20px 0;
+      margin: 20px auto;
+    }
+    .s-item{
+      font-size:15px;
+      font-family:PingFangSC-Regular,PingFang SC;
+      font-weight:400;
+      color:rgba(51,51,51,1);
+      line-height:24px;
+      list-style: none;
+      margin: 15px 0;
+    }
+  </style>
 </head>
-<body class="success">
-<img src="./img/success.png" alt="">
+<body class="s-success">
+<img alt="" class="s-bg" src="./img/分组3@3x.png">
+<div class="s-bottom">
+  <img alt="" class="s-bg-white" src="./img/ba-white.png">
+  <p class="s-p">恭喜您！注册成功</p>
+  <div class="s-buttons">
+    <a class="s-button">
+      iphone 下载
+    </a>
+    <a class="s-button">
+      Android 下载
+    </a>
+  </div>
+  <ul class="s-rule">
+    <li class="s-item">1. ios用户可在app store搜索对宇婚恋，下载本软件
+    </li>
+    <li class="s-item">2. 安卓用户的话，您可以在华为，小米，oppo，vivo的应用商店下载本软件。
+    </li>
+    <li class="s-item">3. 安卓手机用户，也可直接点击右上方，选择浏览器下载本软件
+    </li>
+  </ul>
+</div>
+
+
 </body>
 </html>
+<script crossorigin="anonymous"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+
+  const isWeiXin = () => {
+    const ua = window.navigator.userAgent.toLowerCase();
+    return ua.match(/MicroMessenger/i) == 'micromessenger';
+  }
+
+  /**
+   * @description 插入弹出层
+   */
+  const showMask = () => {
+    if (!isWeiXin()) {
+      return
+    }
+    const img = `<img id="mask" src="./img/mask.png" style="height: 100vh;width: 100vw;position: fixed;top: 0;left: 0;z-index: 100" alt="" onclick="hideMask()">`
+    const success = $('.s-success')
+    success.append(img)
+  }
+
+  /**
+   * @description 隐藏弹出层
+   * @return {void | jQuery}
+   */
+  const hideMask = () => $('#mask').remove()
+
+  /**
+   * @description 绑定事件
+   */
+  window.addEventListener('load', showMask)
+
+</script>
