@@ -180,7 +180,7 @@ const register = () => {
           return
         }
         toast('用户注册成功');
-        window.location.href = './invitation_success.html'
+        window.location.href = './invitation_success'
       }
     )
 };

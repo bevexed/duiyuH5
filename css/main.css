@@ -301,19 +301,19 @@ label {
 
 label > span {
   display: inline-block;
-  width: 25%;
+  width: 4em;
   font-size: 1em;
   color: #333;
 }
 
 label > input {
-  width: 60%;
+  width: 65%;
   outline: none;
   border-color: transparent;
 }
 
 label > input::placeholder {
-  font-size: 1em;
+  font-size: 10px;
   color: #b8b8b8;
 }
 
