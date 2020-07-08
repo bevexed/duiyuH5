@@ -138,6 +138,9 @@
    * @description 插入弹出层
    */
   const showMask = () => {
+    if (download()) {
+      return
+    }
     const img = `<img id="mask" src="./img/mask.png" style="height: 100vh;width: 100vw;position: fixed;top: 0;left: 0;z-index: 100" alt="" onclick="hideMask()">`
     const success = $('.s-success')
     success.append(img)
@@ -162,6 +165,7 @@
       a.href="https://itunes.apple.com/cn/app/id1470585745?mt=8"
     }
     a.click()
+    return true
   }
 
   /**
