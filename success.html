@@ -7,11 +7,12 @@
   <link href="icon.png" rel="apple-touch-icon">
   <link href="css/dist.min.css" rel="stylesheet" type="text/css">
   <style>
-    .s-success{
+    .s-success {
       max-width: 100vw;
       overflow: hidden;
       background: #FFEFD2;
     }
+
     .s-bg {
       width: 100vw;
       position: absolute;
@@ -20,7 +21,7 @@
       z-index: -2;
     }
 
-    .s-bottom{
+    .s-bottom {
       position: absolute;
       top: 272px;
       left: 0;
@@ -59,27 +60,29 @@
       text-underline: none;
       text-decoration-line: none;
     }
-    .s-p{
-      font-size:22px;
-      font-family:PingFangSC-Semibold,PingFang SC;
-      font-weight:600;
-      color:rgba(51,51,51,1);
-      line-height:30px;
+
+    .s-p {
+      font-size: 22px;
+      font-family: PingFangSC-Semibold, PingFang SC;
+      font-weight: 600;
+      color: rgba(51, 51, 51, 1);
+      line-height: 30px;
       text-align: center;
       padding: 10px 0 0 0;
     }
 
-    .s-rule{
+    .s-rule {
       width: 300px;
       padding: 20px 0;
       margin: 20px auto;
     }
-    .s-item{
-      font-size:15px;
-      font-family:PingFangSC-Regular,PingFang SC;
-      font-weight:400;
-      color:rgba(51,51,51,1);
-      line-height:24px;
+
+    .s-item {
+      font-size: 15px;
+      font-family: PingFangSC-Regular, PingFang SC;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+      line-height: 24px;
       list-style: none;
       margin: 15px 0;
     }
@@ -94,9 +97,7 @@
     <a class="s-button" href="https://itunes.apple.com/cn/app/id1470585745?mt=8">
       iphone 下载
     </a>
-    <a class="s-button" href="https://duiyulove.oss-cn-shanghai.aliyuncs.com/marry-release.apk" download="dy.apk">
-      Android 下载
-    </a>
+    <a class="s-button" onclick="showMask()"> Android 下载</a>
   </div>
   <ul class="s-rule">
     <li class="s-item">1. ios用户可在app store搜索对宇婚恋，下载本软件
@@ -117,6 +118,17 @@
 
 <script>
 
+  const isAndroid = () => {
+    const u = window.navigator.userAgent;
+    return u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+  }
+
+  const isiOS = () => {
+    const u = window.navigator.userAgent;
+    return !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  }
+
+
   const isWeiXin = () => {
     const ua = window.navigator.userAgent.toLowerCase();
     return ua.match(/MicroMessenger/i) == 'micromessenger';
@@ -126,9 +138,6 @@
    * @description 插入弹出层
    */
   const showMask = () => {
-    if (!isWeiXin()) {
-      return
-    }
     const img = `<img id="mask" src="./img/mask.png" style="height: 100vh;width: 100vw;position: fixed;top: 0;left: 0;z-index: 100" alt="" onclick="hideMask()">`
     const success = $('.s-success')
     success.append(img)
@@ -140,9 +149,24 @@
    */
   const hideMask = () => $('#mask').remove()
 
+  const download = () => {
+    if (isWeiXin()) {
+      return
+    }
+    const a = document.createElement('a')
+    a.setAttribute('download', 'love')
+    if (isAndroid()) {
+      a.href = "https://duiyulove.oss-cn-shanghai.aliyuncs.com/marry-release.apk"
+    }
+    if (isiOS()) {
+      a.href="https://itunes.apple.com/cn/app/id1470585745?mt=8"
+    }
+    a.click()
+  }
+
   /**
    * @description 绑定事件
    */
-  window.addEventListener('load', showMask)
+  window.addEventListener('load', download)
 
 </script>
